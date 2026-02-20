@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canine First Aid & Emergency Response Manual</title>
+    <style>
+        :root {
+            --primary-black: #1a1a1a;
+            --primary-blue: #1e3a8a;
+            --accent-blue: #3b82f6;
+            --light-blue: #dbeafe;
+            --warm-cream: #fefce8;
+            --soft-gray: #f3f4f6;
+            --alert-red: #dc2626;
+            --warning-amber: #f59e0b;
+            --success-green: #059669;
+            --text-dark: #111827;
+            --text-light: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: #fff;
+        }
+
+        /* Cover Page */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--primary-blue) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .cover-content {
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .cover-badge {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            display: inline-block;
+        }
+
+        .cover h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .cover-subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .cover-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 5px solid rgba(255,255,255,0.3);
+            margin: 2rem auto;
+            background: url('https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600') center/cover;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .cover-footer {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            max-width: 600px;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--warm-cream);
+            padding: 4rem 2rem;
+            border-bottom: 3px solid var(--primary-blue);
+        }
+
+        .toc-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .toc h2 {
+            color: var(--primary-blue);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .toc h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--accent-blue);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .toc-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary-blue);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .toc-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .toc-number {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            page-break-before: always;
+        }
+
+        .section-header {
+            background: var(--primary-black);
+            color: white;
+            padding: 3rem 2rem;
+            margin: -4rem -2rem 3rem -2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--primary-blue));
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e5e7eb;
+            position: relative;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-blue);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .card-title {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Real Images */
+        .real-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: block;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .image-grid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .image-caption {
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Alert Boxes */
+        .alert {
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 5px solid;
+            position: relative;
+        }
+
+        .alert-critical {
+            background: #fef2f2;
+            border-color: var(--alert-red);
+            color: #7f1d1d;
+        }
+
+        .alert-warning {
+            background: #fffbeb;
+            border-color: var(--warning-amber);
+            color: #92400e;
+        }
+
+        .alert-info {
+            background: var(--light-blue);
+            border-color: var(--accent-blue);
+            color: var(--primary-blue);
+        }
+
+        .alert-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Lists */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .checklist li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .numbered-list {
+            counter-reset: item;
+            list-style: none;
+            padding: 0;
+        }
+
+        .numbered-list li {
+            counter-increment: item;
+            padding: 1rem 0 1rem 3rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .numbered-list li::before {
+            content: counter(item);
+            position: absolute;
+            left: 0;
+            background: var(--primary-blue);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 2rem;
+            font-weight: bold;
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .data-table th {
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .data-table tr:hover {
+            background: #f9fafb;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Color Coding for Emergencies */
+        .emergency-level {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .level-critical {
+            background: var(--alert-red);
+            color: white;
+        }
+
+        .level-urgent {
+            background: var(--warning-amber);
+            color: white;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, var(--light-blue) 0%, #fff 100%);
+            border: 2px solid var(--accent-blue);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .highlight-box::before {
+            content: '💡';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: white;
+            padding: 0 10px;
+            font-size: 1.5rem;
+        }
+
+        /* Pro Tips */
+        .pro-tip {
+            background: var(--primary-black);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .pro-tip::before {
+            content: '💡 PRO TIP';
+            display: block;
+            color: var(--accent-blue);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        /* Procedure Steps */
+        .procedure {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .procedure-step {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .procedure-step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .step-number {
+            background: var(--primary-blue);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Vital Signs Grid */
+        .vitals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .vital-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .vital-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .vital-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .vital-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin: 0.5rem 0;
+        }
+
+        /* Footer */
+        .manual-footer {
+            background: var(--primary-black);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .emergency-card {
+            background: white;
+            color: var(--text-dark);
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 600px;
+            margin: 2rem auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .emergency-card h3 {
+            color: var(--alert-red);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- COVER PAGE -->
+    <div class="cover">
+        <div class="cover-badge">Educational Resource & Certification Course</div>
+        <div class="cover-content">
+            <h1>Canine First Aid & Emergency Response Manual</h1>
+            <p class="cover-subtitle">A Holistic Approach to Canine Emergency Preparedness, Response & Prevention</p>
+            <div class="cover-image"></div>
+            <p style="font-size: 1.1rem; opacity: 0.9;">For Pet Owners & Professional Dog Trainers</p>
+        </div>
+        <div class="cover-footer">
+            <strong>DISCLAIMER:</strong> This manual is for educational and emergency first aid purposes only. It does not replace professional veterinary care.
+        </div>
+    </div>
+
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc">
+        <div class="toc-container">
+            <h2>📋 Contents</h2>
+            <div class="toc-grid">
+                <div class="toc-item">
+                    <span class="toc-number">1</span>
+                    <strong>Preparing for Emergencies</strong>
+                    <p>Pre-emergency conditioning & first aid kits</p>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-number">2</span>
+                    <strong>Approach, Capture & Restraint</strong>
+                    <p>Safety protocols & muzzle techniques</p>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-number">3</span>
+                    <strong>Reading Vital Signs</strong>
+                    <p>Baseline normals & gum color assessment</p>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-number">4</span>
+                    <strong>Life-Threatening Emergencies</strong>
+                    <p>CPR, shock, choking & bleeding</p>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-number">5</span>
+                    <strong>Toxins & Poisoning</strong>
+                    <p>Top 10 toxins & emergency protocols</p>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-number">6</span>
+                    <strong>Environmental Emergencies</strong>
+                    <p>Heatstroke, hypothermia & burns</p>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-number">7</span>
+                    <strong>Wound Care</strong>
+                    <p>Abrasions, bites & puncture wounds</p>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-number">8</span>
+                    <strong>Prevention & Preparedness</strong>
+                    <p>Holistic approach & disaster planning</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 1: PREPARING FOR EMERGENCIES -->
+    <div class="section">
+        <div class="section-header">
+            <h2>Preparing for Emergencies</h2>
+            <p>Setting Yourself Up for Success in a Crisis</p>
+        </div>
+
+        <div class="alert alert-info">
+            <div class="alert-title">🧠 The Golden Hour Mindset</div>
+            <p>Emergencies trigger human panic, which amplifies a dog's stress response and can turn a manageable situation life-threatening. Preparation creates procedural memory — your body knows what to do when your mind is racing.</p>
+        </div>
+
+        <!-- First Aid Kit Image -->
+        <img src="https://images.unsplash.com/photo-1601758124096-1fd661873b95?w=800&h=400&fit=crop" alt="First Aid Kit Contents" class="real-image">
+        <p class="image-caption">A comprehensive first aid kit is your first line of defense in canine emergencies</p>
+
+        <div class="content-card">
+            <h3 class="card-title">🎯 Pre-Emergency Conditioning</h3>
+            <ul class="checklist">
+                <li><strong>Practice restraint</strong> during calm times so your dog accepts handling</li>
+                <li><strong>Desensitize to transportation:</strong> Ensure your dog enters a vehicle calmly, even when distressed</li>
+                <li><strong>Know your baseline:</strong> Record normal vitals quarterly (see Topic 3)</li>
+                <li><strong>Emergency reconnaissance:</strong> Locate 24-hour ER vets within a 30-minute radius; save their numbers under "Vet ER - [Location]"</li>
+            </ul>
+        </div>
+
+        <div class="two-column">
+            <div class="content-card">
+                <h3 class="card-title">🎒 The Portable Kit</h3>
+                <ul class="checklist">
+                    <li>Digital rectal thermometer (+ petroleum jelly)</li>
+                    <li>Self-adhering bandage wrap (Vetrap/Coban)</li>
+                    <li>Gauze pads, non-stick sterile dressing, rolled gauze</li>
+                    <li>Emergency muzzle or 3-foot gauze/belt</li>
+                    <li>Tick remover tool</li>
+                    <li>Saline eye wash</li>
+                    <li>Styptic powder (for nail bleeds)</li>
+                    <li>Emergency thermal blanket (space blanket)</li>
+                    <li>Collapsible water bowl & latex gloves</li>
+                    <li>Flashlight/headlamp</li>
+                    <li>OTC 3% hydrogen peroxide*</li>
+                    <li>Diphenhydramine (Benadryl) — 1mg/lb</li>
+                    <li>Emergency contact card with vitals</li>
+                </ul>
+                <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 1rem;">*For inducing vomiting ONLY on veterinary advice</p>
+            </div>
+
+            <div class="content-card">
+                <h3 class="card-title">🏠 The Home Station</h3>
+                <p style="margin-bottom: 1rem;"><strong>All portable kit items PLUS:</strong></p>
+                <ul class="checklist">
+                    <li>Activated charcoal (vet-grade, not BBQ variety)</li>
+                    <li>Digital scale (for medication dosages)</li>
+                    <li>Nail clippers, scissors, blunt-tipped bandage scissors</li>
+                    <li>Soft Elizabethan collar (prevents wound interference)</li>
+                    <li>Orthopedic foam blocks/splints (various sizes)</li>
+                    <li>Clean towels (compression, restraint, warmth)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 2: APPROACH, CAPTURE & RESTRAINT -->
+    <div class="section">
+        <div class="section-header">
+            <h2>Approach, Capture & Restraint</h2>
+            <p>Safety First: Protecting You and the Injured Dog</p>
+        </div>
+
+        <!-- Aggressive/Fearful Dog Image -->
+        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&h=400&fit=crop" alt="Dog Body Language Warning" class="real-image">
+        <p class="image-caption">Learn to recognize signs of fear and aggression before approaching an injured dog</p>
+
+        <div class="alert alert-critical">
+            <div class="alert-title">⚠️ Critical Warning</div>
+            <p><strong>The Psychology of Pain:</strong> Even the sweetest family dog can bite when injured. Pain overrides training and social conditioning. <strong>Never assume your dog "would never bite."</strong></p>
+        </div>
+
+        <div class="content-card">
+            <h3 class="card-title">🚶 Approach Protocol</h3>
+            <div class="procedure">
+                <div class="procedure-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Assess the Environment</h4>
+                        <p>Secure loose traffic, electrical wires, or other hazards first. Your safety comes first.</p>
+                    </div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Observe from 10 Feet</h4>
+                        <p>Is the dog lateral recumbent? Vocalizing? Guarding a limb? Assess body language before approaching.</p>
+                    </div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Approach Indirectly</h4>
+                        <p>Come from the side (not head-on), avoid direct eye contact, use low voice tones.</p>
+                    </div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Offer Scent</h4>
+                        <p>Extend a closed fist for the dog to sniff if conscious; let them come to you if mobile.</p>
+                    </div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Touch Last</h4>
+                        <p>Begin with the shoulders/ribcage area, avoiding the head initially.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="two-column">
+            <div class="content-card">
+                <h3 class="card-title">🤝 Capture Techniques</h3>
+                <p><strong>Rabies Pole/Makeshift:</strong> Use a leash looped to create a noose if the dog is aggressive; tighten behind ears, not throat.</p>
+                <p><strong>Burrito Method:</strong> For small dogs, wrap securely in a towel with the head exposed to prevent thrashing.</p>
+                <p><strong>Blanket Toss:</strong> For severely aggressive dogs, drop a heavy blanket over the head to disorient, then scoop.</p>
+            </div>
+
+            <div class="content-card">
+                <h3 class="card-title">🤐 Muzzle Application</h3>
+                <div class="alert alert-warning">
+                    <strong>The Rule:</strong> If the dog is in pain and you need to manipulate the injury, muzzle. No exceptions for "nice dogs."
+                </div>
+                <p><strong>Proper Fitting:</strong> Snug enough that the jaw cannot open, loose enough for panting.</p>
+                <p><strong>Brachycephalic breeds (Pugs, Bulldogs):</strong> Use basket muzzles only; cloth can obstruct breathing.</p>
+            </div>
+        </div>
+
+        <!-- Muzzle Application Image -->
+        <img src="https://images.unsplash.com/photo-1591853695452-79c0356d6a3d?w=800&h=400&fit=crop" alt="Proper Muzzle Fitting" class="real-image">
+        <p class="image-caption">Proper muzzle fitting ensures safety while allowing the dog to breathe comfortably</p>
+
+        <div class="content-card">
+            <h3 class="card-title">🪢 Makeshift Muzzle Construction</h3>
+            <ol class="numbered-list">
+                <li>Create a loop with gauze, a leash, or a strip of cloth</li>
+                <li>Loop over muzzle, tighten behind the canine teeth</li>
+                <li>Cross ends under the jaw</li>
+                <li>Tie behind the ears (not the throat)</li>
+            </ol>
+            <div class="alert alert-critical" style="margin-top: 1rem;">
+                <strong>CRITICAL:</strong> Never muzzle a vomiting dog or one with respiratory distress. If the dog starts vomiting, cut the muzzle off immediately with safety scissors.
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h3 class="card-title">🛡️ Restraint for Treatment</h3>
+            <div class="two-column">
+                <div>
+                    <h4 style="color: var(--primary-blue); margin-bottom: 1rem;">Lateral Recumbency</h4>
+                    <ul class="checklist">
+                        <li>Place the dog on its side on a flat, stable surface</li>
+                        <li>Stand with your body alongside the dog's spine</li>
+                        <li>One arm under the neck (controlling head), one arm over the body, securing the legs</li>
+                        <li>Weight is distributed to prevent rolling but not compressing the chest</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--primary-blue); margin-bottom: 1rem;">The Standing Hold</h4>
+                    <ul class="checklist">
+                        <li>Stand beside the dog, facing the same direction</li>
+                        <li>One arm around the chest (under front legs), one arm around the abdomen (in front of hind legs)</li>
+                        <li>Pull dog closely against your body — this mimics the "pressure hug" and has a calming effect via the parasympathetic nervous system</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 3: VITAL SIGNS -->
+    <div class="section">
+        <div class="section-header">
+            <h2>How to Read Your Dog's Vital Signs</h2>
+            <p>Establishing Baseline Normals (Record These Quarterly)</p>
+        </div>
+
+        <!-- Vet Examining Dog -->
+        <img src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=800&h=400&fit=crop" alt="Veterinarian Examining Dog" class="real-image">
+        <p class="image-caption">Regular vital sign checks help you recognize emergencies early</p>
+
+        <div class="vitals-grid">
+            <div class="vital-card">
+                <div class="vital-icon">❤️</div>
+                <h4>Heart Rate</h4>
+                <div class="vital-value">60-140</div>
+                <p>bpm depending on size</p>
+                <small>Large: 60-100 | Small: 100-140 | Puppies: up to 180</small>
+            </div>
+            <div class="vital-card">
+                <div class="vital-icon">💨</div>
+                <h4>Respiratory Rate</h4>
+                <div class="vital-value">10-30</div>
+                <p>breaths per minute</p>
+                <small>At rest | Count chest rises</small>
+            </div>
+            <div class="vital-card">
+                <div class="vital-icon">🌡️</div>
+                <h4>Body Temperature</h4>
+                <div class="vital-value">38.3-39.2°C</div>
+                <p>101.0-102.5°F</p>
+                <small>Rectal measurement</small>
+            </div>
+            <div class="vital-card">
+                <div class="vital-icon">⏱️</div>
+                <h4>Capillary Refill</h4>
+                <div class="vital-value">1-2 sec</div>
+                <p>Normal CRT</p>
+                <small>Press gum until white, release</small>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h3 class="card-title">🩺 Assessment Techniques</h3>
+            <div class="two-column">
+                <div>
+                    <h4 style="color: var(--primary-blue);">Heart Rate & Pulse</h4>
+                    <p><strong>Femoral pulse:</strong> Groin area where hind leg meets body; use two fingers, not thumb.</p>
+                    <p><strong>Apical pulse:</strong> Place stethoscope just behind left elbow at 4th-5th intercostal space.</p>
+                    <p><strong>Pulse quality:</strong> Should be strong, regular, and synchronous with heartbeat.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--primary-blue);">Body Temperature Technique</h4>
+                    <ol class="numbered-list">
+                        <li>Lubricate digital thermometer with petroleum jelly</li>
+                        <li>Insert gently into rectum 1 inch (small dogs) to 2 inches (large dogs)</li>
+                        <li>Wait for beep; do not force if resistance occurs</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gum Color Images -->
+        <div class="image-grid">
+            <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?w=400&h=250&fit=crop" alt="Checking Dog Gums">
+            <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=250&fit=crop" alt="Dog Mouth Exam">
+            <img src="https://images.unsplash.com/photo-1596492784531-6e6eb5ea9205?w=400&h=250&fit=crop" alt="Veterinarian Check">
+        </div>
+        <p class="image-caption">Examining gum color and mucous membranes is a critical assessment skill</p>
+
+        <div class="content-card">
+            <h3 class="card-title">👄 Normal Gum Colors by Breed Type</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Breed Category</th>
+                        <th>Examples</th>
+                        <th>Normal Gum Color</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Highly Pigmented</td>
+                        <td>Chow Chow, Shar-Pei, Thai Ridgeback</td>
+                        <td>Blue-black, purple-black, lavender-gray</td>
+                    </tr>
+                    <tr>
+                        <td>Spotted/Patchy</td>
+                        <td>Labrador, Rottweiler, Mastiff, Dalmatian, GSD</td>
+                        <td>Mixed pink and black patches</td>
+                    </tr>
+                    <tr>
+                        <td>Light Pink</td>
+                        <td>Golden Retriever, Beagle, Poodle, Greyhound</td>
+                        <td>Salmon-pink</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <strong>How to Assess Dark-Pigmented Breeds:</strong> If your dog has naturally black/blue gums (Chow Chow, Shar-Pei), check these alternative mucous membrane sites:
+                <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                    <li><strong>Inner Lip (Buccal Mucosa):</strong> Lift the lip and look at the inner surface opposite the gums</li>
+                    <li><strong>Conjunctiva:</strong> Gently pull down the lower eyelid — should be pink</li>
+                    <li><strong>Tongue:</strong> Often less pigmented than gums in spotted breeds</li>
+                    <li><strong>Vulva/Prepuce:</strong> Mucous membranes of the genitalia (if safe to check)</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h3 class="card-title">🚨 Pathological Gum Colors (All Breeds)</h3>
+            <p style="margin-bottom: 1rem;">These colors indicate medical emergencies regardless of breed. <strong>Check alternative sites if your dog has naturally dark gums.</strong></p>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Color</th>
+                        <th>Medical Term</th>
+                        <th>Indicates</th>
+                        <th>Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pale Pink/White</td>
+                        <td>Pallor</td>
+                        <td>Anemia, blood loss, shock</td>
+                        <td><span class="emergency-level level-critical">Emergency</span></td>
+                    </tr>
+                    <tr>
+                        <td>Blue/Purple</td>
+                        <td>Cyanosis</td>
+                        <td>Oxygen deprivation</td>
+                        <td><span class="emergency-level level-critical">Immediate</span></td>
+                    </tr>
+                    <tr>
+                        <td>Yellow</td>
+                        <td>Icterus</td>
+                        <td>Liver failure, hemolysis</td>
+                        <td><span class="emergency-level level-urgent">Urgent (24h)</span></td>
+                    </tr>
+                    <tr>
+                        <td>Brick Red</td>
+                        <td>Hyperemia</td>
+                        <td>Heatstroke, sepsis, shock</td>
+                        <td><span class="emergency-level level-critical">Emergency</span></td>
+                    </tr>
+                    <tr>
+                        <td>Brown/Gray</td>
+                        <td>Necrosis</td>
+                        <td>Tissue death, severe toxicity</td>
+                        <td><span class="emergency-level level-critical">Critical</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="pro-tip">
+                Take a photo of your dog's normal gum color when healthy. In an emergency, compare to this baseline rather than trying to remember "how dark is too dark."
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h3 class="card-title">💧 Dehydration Assessment</h3>
+            <div class="two-column">
+                <div>
+                    <h4 style="color: var(--primary-blue);">The Skin Tent Test</h4>
+                    <ol class="numbered-list">
+                        <li>Lift skin over shoulders/scapula into a "tent"</li>
+                        <li><strong>Normal:</strong> Snaps back immediately</li>
+                        <li><strong>5-7% dehydrated:</strong> Returns slowly (2-3 seconds)</li>
+                        <li><strong>>10% dehydrated:</strong> Remains tented (CRITICAL)</li>
+                    </ol>
+                </div>
+                <div>
+                    <h4 style="color: var(--primary-blue);">Other Indicators</h4>
+                    <ul class="checklist">
+                        <li>Dry/sticky gums</li>
+                        <li>Sunken eyes</li>
+                        <li>Prolonged CRT</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 4: LIFE-THREATENING EMERGENCIES -->
+    <div class="section">
+        <div class="section-header">
+            <h2>First Aid for Life-Threatening Emergencies</h2>
+            <p>Critical Interventions That Save Lives</p>
+        </div>
+
+        <!-- CPR Training Image -->
+        <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=800&h=400&fit=crop" alt="Canine CPR Demonstration" class="real-image">
+        <p class="image-caption">CPR training showing proper hand placement and compression technique</p>
+
+        <!-- CPR Section -->
+        <div class="content-card">
+            <h3 class="card-title">🫁 CPR (Cardiopulmonary Resuscitation)</h3>
+            <div class="alert alert-info">
+                <strong>Based on 2024 RECOVER Initiatives Guidelines</strong>
+            </div>
+            
+            <div class="alert alert-critical">
+                <div class="alert-title">When to Perform</div>
+                <p>Dog is unresponsive, apneic (not breathing), AND has no pulse. <strong>Do NOT perform on a dog that has a pulse or is breathing.</strong></p>
+            </div>
+
+            <div class="highlight-box">
+                <h4 style="color: var(--primary-blue); margin-bottom: 0.5rem;">Compression Technique (2024 Standards)</h4>
+                <ul class="checklist">
+                    <li><strong>Rate:</strong> 100-120 compressions per minute (steady rhythm — think "Stayin' Alive")</li>
+                    <li><strong>Depth:</strong> 1/3 to 1/2 of chest width</li>
+                    <li><strong>Recoil:</strong> Allow full chest recoil between compressions (50:50 ratio)</li>
+                    <li><strong>Ratio:</strong> 30 compressions, then 2 breaths</li>
+                </ul>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Dog Type</th>
+                        <th>Position</th>
+                        <th>Technique</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Most dogs</td>
+                        <td>Left lateral recumbency</td>
+                        <td>Compress over heart (behind left elbow)</td>
+                    </tr>
+                    <tr>
+                        <td>Barrel-chested (Bulldogs, Labs)</td>
+                        <td>Dorsal recumbency (on back)</td>
+                        <td>Compress over sternum</td>
+                    </tr>
+                    <tr>
+                        <td>Deep-chested (Greyhounds)</td>
+                        <td>Left lateral</td>
+                        <td>Compress highest point of ribcage</td>
+                    </tr>
+                    <tr>
+                        <td>Small dogs/cats (&lt;6.8 kgs)</td>
+                        <td>Left lateral</td>
+                        <td>Circumferential 2-thumb technique</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-warning">
+                <strong>Rotation:</strong> Switch compressors every 2 minutes to prevent fatigue and maintain quality.
+            </div>
+        </div>
+
+        <!-- Shock Section -->
+        <div class="content-card">
+            <h3 class="card-title">⚡ Shock</h3>
+            <p>Circulatory collapse prevents oxygen delivery to tissues.</p>
+            
+            <div class="two-column">
+                <div>
+                    <h4 style="color: var(--primary-blue);">Causes</h4>
+                    <ul class="checklist">
+                        <li>Blood loss (hemorrhagic)</li>
+                        <li>Allergic reaction (anaphylactic)</li>
+                        <li>Infection (septic)</li>
+                        <li>Trauma, GDV, heatstroke</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--primary-blue);">Signs</h4>
+                    <ul class="checklist">
+                        <li>Pale gums</li>
+                        <li>Rapid/weak pulse</li>
+                        <li>Cold extremities</li>
+                        <li>Lethargy, collapse</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="procedure">
+                <h4 style="color: var(--primary-blue); margin-bottom: 1rem;">First Aid Protocol</h4>
+                <div class="procedure-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Position</h4>
+                        <p>Left lateral recumbency, head slightly lower than body (if no head trauma)</p>
+                    </div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Warmth</h4>
+                        <p>Cover with blankets (prevent hypothermia but don't overheat)</p>
+                    </div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Oxygen</h4>
+                        <p>If available, flow-by oxygen near the nose (not forced)</p>
+                    </div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Transport</h4>
+                        <p>Minimal handling, gentle movement, immediate veterinary transfer</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-critical">
+                <strong>NO FLUIDS BY MOUTH</strong> — aspiration risk if vomiting; will need IV fluids at the hospital.
+            </div>
+        </div>
+
+        <!-- Choking Section -->
+        <div class="content-card">
+            <h3 class="card-title">😮 Choking</h3>
+            
+            <!-- Choking Dog Image -->
+            <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&h=300&fit=crop" alt="Dog Choking Emergency" class="real-image" style="height: 300px;">
+            <p class="image-caption">Recognizing choking signs: pawing at mouth, distress, inability to breathe</p>
+            
+            <div class="alert alert-warning">
+                <strong>Recognition:</strong> Pawing at mouth, cyanotic (blue) tongue, high-pitched squeaking, inability to bark/cough effectively.
+            </div>
+
+            <div class="procedure">
+                <div class="procedure-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Open Mouth</h4>
+                        <p>Use one hand on upper jaw, thumb of other hand on lower jaw behind canines — forces mouth open without being bitten.</p>
+                    </div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Finger Sweep</h4>
+                        <p>Look with flashlight, remove object with hooked finger (<strong>sweep only if you see it</strong> — blind sweeps push objects deeper).</p>
+                    </div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>If Still Obstructed</h4>
+                        <p><strong>Small dogs:</strong> Hold by hips, head down, shake gently with centrifugal force.<br>
+                        <strong>Large dogs:</strong> Lift hind legs like a wheelbarrow; gravity may dislodge object.</p>
+                    </div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Heimlich (Last Resort)</h4>
+                        <p>Place fist just behind ribcage, thrust sharply up toward head (only if breathing has ceased).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pro-tip">
+                <strong>Post-obstruction:</strong> Even if successful, see a vet — objects can cause esophageal tears or residual aspiration pneumonia.
+            </div>
+        </div>
+
+        <!-- Bleeding Section -->
+        <div class="content-card">
+            <h3 class="card-title">🩸 Bleeding</h3>
+            
+            <!-- Bleeding/Wound Image -->
+            <img src="https://images.unsplash.com/photo-1601758124096-1fd661873b95?w=800&h=300&fit=crop" alt="Dog Wound Bandaging" class="real-image" style="height: 300px;">
+            <p class="image-caption">Proper bandaging technique for wound management</p>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Appearance</th>
+                        <th>Response</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Capillary (oozing)</td>
+                        <td>Slow, oozing</td>
+                        <td>Clean, antibiotic ointment, bandage</td>
+                    </tr>
+                    <tr>
+                        <td>Venous (steady flow)</td>
+                        <td>Dark red, steady</td>
+                        <td>Direct pressure 3-5 min; pressure bandage</td>
+                    </tr>
+                    <tr>
+                        <td>Arterial (spurting)</td>
+                        <td>Bright red, rhythmic</td>
+                        <td><strong>LIFE-THREATENING</strong> — direct pressure, tourniquet, emergency transport</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <h4 style="color: var(--primary-blue);">Bandaging Technique</h4>
+                <ol class="numbered-list">
+                    <li>Non-stick gauze directly on wound</li>
+                    <li>Rolled gauze wrap (snug, not tight — two fingers should fit under)</li>
+                    <li>Self-adhering outer layer (Vetrap)</li>
+                    <li>Check toes every 15 min — if cold/swollen, bandage too tight</li>
+                </ol>
+            </div>
+
+            <div class="alert alert-critical">
+                <div class="alert-title">Tourniquet Protocol (Limb Arterial Bleeding Only)</div>
+                <ul class="checklist">
+                    <li>Place 2-3 inches above wound (never over joint)</li>
+                    <li>Use belt, leash, or cloth with stick/pencil for windlass</li>
+                    <li>Tighten until bleeding stops</li>
+                    <li><strong>CRITICAL:</strong> Loosen for 30 seconds every 5 minutes to prevent tissue necrosis</li>
+                    <li>Mark time of application on dog with Sharpie</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 5: TOXINS -->
+    <div class="section">
+        <div class="section-header">
+            <h2>Poisoning & Toxic Ingestion</h2>
+            <p>Based on 2024 ASPCA Poison Control Data</p>
+        </div>
+
+        <!-- Toxic Foods Image -->
+        <img src="https://images.unsplash.com/photo-1582798358481-d199fb7347d7?w=800&h=400&fit=crop" alt="Toxic Foods for Dogs" class="real-image">
+        <p class="image-caption">Common household foods that are toxic to dogs: chocolate, grapes, onions, and xylitol products</p>
+
+        <div class="content-card">
+            <h3 class="card-title">☠️ Top 10 Toxins of 2024</h3>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Toxin Category</th>
+                        <th>Key Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>OTC Medications</td><td>Ibuprofen, acetaminophen, supplements</td></tr>
+                    <tr><td>2</td><td>Human Foods</td><td>Xylitol, grapes/raisins, onions/garlic</td></tr>
+                    <tr><td>3</td><td>Prescription Drugs</td><td>Antidepressants, ADHD meds, cardiac meds</td></tr>
+                    <tr><td>4</td><td>Chocolate</td><td>13.6% of exposures (rising annually)</td></tr>
+                    <tr><td>5</td><td>Veterinary Products</td><td>Calming chews, flavored medications</td></tr>
+                    <tr><td>6</td><td>Plants/Fungi</td><td>Sago palm, lilies, mushrooms</td></tr>
+                    <tr><td>7</td><td>Rodenticides</td><td>Internal bleeding, kidney failure, seizures</td></tr>
+                    <tr><td>8</td><td>Household Products</td><td>Deoxidizer packets, batteries</td></tr>
+                    <tr><td>9</td><td>Insecticides</td><td>Organophosphates, pyrethroids</td></tr>
+                    <tr><td>10</td><td>Recreational Drugs</td><td>THC decreasing, hallucinogenic mushrooms increasing</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="content-card">
+            <h3 class="card-title">🆘 Emergency Protocol</h3>
+            <div class="procedure">
+                <div class="procedure-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Identify</h4>
+                        <p>Find packaging/remaining substance; note time and approximate amount</p>
+                    </div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Call</h4>
+                        <p><strong>Poison Control</strong> or <strong>Pet Poison Helpline</strong> AND your <strong>vet</strong></p>
+                    </div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Do NOT Induce Vomiting If:</h4>
+                        <ul class="checklist">
+                            <li>Caustic substances (acids/alkalis)</li>
+                            <li>Hydrocarbons (petroleum products)</li>
+                            <li>Unconscious/altered mental status</li>
+                            <li>Sharp objects (bone, glass)</li>
+                            <li>History of GDV/bloat-prone breeds</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Induce Vomiting (Only if Advised)</h4>
+                        <p>3% hydrogen peroxide: 1 teaspoon per 10 lbs, max 3 tablespoons; works within 15 minutes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bloat Image -->
+        <img src="https://images.unsplash.com/photo-1535930749574-1399327ce78f?w=800&h=400&fit=crop" alt="Great Dane - Bloat Risk Breed" class="real-image">
+        <p class="image-caption">Great Danes and other deep-chested breeds are at highest risk for gastric dilatation-volvulus (bloat)</p>
+
+        <div class="content-card">
+            <h3 class="card-title">🐕 Canine Bloat (GDV) — The Mother of All Emergencies</h3>
+            <div class="alert alert-critical">
+                <div class="alert-title">100% Fatal Without Treatment</div>
+                <p>10-45% mortality even with immediate surgery. Time is tissue — stomach walls necrose within hours.</p>
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <h4 style="color: var(--primary-blue);">Classic Presentation</h4>
+                    <ul class="checklist">
+                        <li>Unproductive retching (nothing comes up)</li>
+                        <li>Distended abdomen (tight as a drum)</li>
+                        <li>Restlessness, pacing</li>
+                        <li>Prayer position (hind up, chest down)</li>
+                        <li>Pale gums, rapid heart rate, collapse</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--primary-blue);">High-Risk Breeds</h4>
+                    <ul class="checklist">
+                        <li>Great Danes (highest risk)</li>
+                        <li>Weimaraners, Standard Poodles</li>
+                        <li>Irish Setters, German Shepherds</li>
+                        <li>Dobermans, Basset Hounds, Boxers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert alert-critical" style="margin-top: 1rem;">
+                <strong>DO NOT:</strong> Attempt to relieve gas with needles at home (risk of perforation), give simethicone (too slow), or wait to see if it resolves.
+            </div>
+
+            <div class="highlight-box">
+                <strong>Immediate Action:</strong> Transport immediately (call ahead; they need to prep surgery suite). Minimize movement. Position sternum down in vehicle.
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 6: ENVIRONMENTAL EMERGENCIES -->
+    <div class="section">
+        <div class="section-header">
+            <h2>Environmental Emergencies</h2>
+            <p>Heatstroke, Hypothermia, Burns & Water Safety</p>
+        </div>
+
+        <!-- Heatstroke Image -->
+        <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=800&h=400&fit=crop" alt="Dog Panting in Heat" class="real-image">
+        <p class="image-caption">Excessive panting and drooling are early signs of heatstroke - a true emergency</p>
+
+        <div class="content-card">
+            <h3 class="card-title">🌡️ Heatstroke</h3>
+            <div class="alert alert-critical">
+                <strong>Lethal Zone:</strong> >42.8°C (109°F) — mortality approaches 100%
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <h4 style="color: var(--primary-blue);">Risk Factors</h4>
+                    <ul class="checklist">
+                        <li>Brachycephalic breeds (Pugs, Bulldogs)</li>
+                        <li>Obesity, dark/thick coats</li>
+                        <li>Exertion in heat</li>
+                        <li>Enclosed cars (60°C/140°F in 40 min at 27°C/80°F)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--primary-blue);">Progressive Signs</h4>
+                    <ul class="checklist">
+                        <li>Early: Excessive panting, bright red gums</li>
+                        <li>Progressive: Vomiting/diarrhea (bloody), ataxia</li>
+                        <li>Shock stage: Pale gums, bradycardia, coma</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="procedure">
+                <h4 style="color: var(--primary-blue);">First Aid</h4>
+                <div class="procedure-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">Remove from heat: Shade/air conditioning immediately</div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">Wet down: Lukewarm (not cold) water on belly, groin, armpits, paw pads</div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">Airflow: Fan aggressively</div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">Water: Small amounts if conscious (don't force)</div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content"><strong>STOP cooling at 39.4°C (103°F)</strong> to prevent hypothermia rebound</div>
+                </div>
+            </div>
+
+            <div class="alert alert-critical">
+                <strong>CRITICAL:</strong> Do NOT use ice water or ice baths — peripheral vasoconstriction traps heat in core organs.
+            </div>
+        </div>
+
+        <!-- Winter Image -->
+        <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=800&h=400&fit=crop" alt="Dog in Cold Weather" class="real-image">
+        <p class="image-caption">Cold weather emergencies: monitor for shivering, lethargy, and frostbite on extremities</p>
+
+        <div class="content-card">
+            <h3 class="card-title">❄️ Hypothermia & Frostbite</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Stage</th>
+                        <th>Temperature</th>
+                        <th>Signs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mild</td>
+                        <td>32.2-37.2°C (90-99°F)</td>
+                        <td>Shivering, lethargy, weakness</td>
+                    </tr>
+                    <tr>
+                        <td>Moderate</td>
+                        <td>27.78-32.22°C (82-90°F)</td>
+                        <td>Muscle rigidity, decreased heart rate</td>
+                    </tr>
+                    <tr>
+                        <td>Severe</td>
+                        <td>&lt;27.78°C (&lt;82°F)</td>
+                        <td>Fixed dilated pupils, coma, ventricular fibrillation</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <strong>Frostbite Sites:</strong> Ear tips, tail, paws, scrotum. <strong>DO NOT:</strong> Rub tissue (ice crystals damage cells further); do not apply direct heat (heating pads cause thermal burns to numb tissue).
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h3 class="card-title">🔥 Burns</h3>
+            <div class="two-column">
+                <div>
+                    <h4 style="color: var(--primary-blue);">Classification</h4>
+                    <p><strong>First degree:</strong> Red, painful, no blistering<br>
+                    <strong>Second degree:</strong> Blisters, hair loss<br>
+                    <strong>Third degree:</strong> Charring, white/gray tissue, painless</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--primary-blue);">First Aid</h4>
+                    <ol class="numbered-list">
+                        <li>Stop the burning: Remove from source</li>
+                        <li>Cool: Room temperature water flush 10-20 min</li>
+                        <li>Cover: Sterile, non-stick dressing</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="alert alert-warning">
+                <strong>Electrical Burns:</strong> Mouth lesions may look minor, but pulmonary edema develops 24-48 hours later. Immediate vet check required.
+            </div>
+        </div>
+
+        <!-- Water Safety Image -->
+        <img src="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=800&h=400&fit=crop" alt="Dog Swimming Safety" class="real-image">
+        <p class="image-caption">Water safety: Monitor for both drowning and water intoxication (hyponatremia)</p>
+
+        <div class="content-card">
+            <h3 class="card-title">💧 Drowning & Water Intoxication</h3>
+            <div class="alert alert-info">
+                <strong>Water Intoxication (Hyponatremia):</strong> Ingesting large volumes of fresh water leads to dilution of blood sodium and cerebral edema. <strong>Differentiation from heatstroke:</strong> Usually occurs in cool/cold water; no hyperthermia.
+            </div>
+            <p><strong>Action:</strong> Emergency vet for IV hypertonic saline — death can occur within hours; do NOT restrict water (causes rapid sodium shifts).</p>
+        </div>
+    </div>
+
+    <!-- SECTION 7: WOUND CARE -->
+    <div class="section">
+        <div class="section-header">
+            <h2>Wound Care</h2>
+            <p>Abrasions, Bite Wounds, and Puncture Wounds</p>
+        </div>
+
+        <!-- Wound Care Image -->
+        <img src="https://images.unsplash.com/photo-1601758124096-1fd661873b95?w=800&h=400&fit=crop" alt="Dog First Aid Bandaging" class="real-image">
+        <p class="image-caption">Proper wound cleaning and bandaging prevents infection and promotes healing</p>
+
+        <div class="content-card">
+            <h3 class="card-title">🩹 Abrasions (Scrapes)</h3>
+            <ul class="checklist">
+                <li>Clean with sterile saline or dilute betadine</li>
+                <li>Apply thin layer of antibiotic ointment</li>
+                <li>Cover with non-stick pad; change daily</li>
+                <li>Do not scrub vigorously (damages granulation tissue)</li>
+            </ul>
+        </div>
+
+        <div class="content-card">
+            <h3 class="card-title">🦷 Puncture Wounds (Nails, Sticks, Bites)</h3>
+            <div class="alert alert-warning">
+                <strong>Worse than they look:</strong> Seal quickly, trap infection, anaerobic bacteria thrive.
+            </div>
+            <ul class="checklist">
+                <li>Do not flush deeply at home (can force bacteria deeper)</li>
+                <li>Clip hair, clean surface, leave open to drain</li>
+                <li><strong>Bite wounds:</strong> 100% infection rate within 12 hours; antibiotics mandatory</li>
+                <li>Pocket abscess: Hot packing (warm compress 10 min, 4x daily) to bring to head</li>
+            </ul>
+        </div>
+
+        <div class="content-card">
+            <h3 class="card-title">✋ Degloving Injuries</h3>
+            <div class="alert alert-critical">
+                Wrap in saline-soaked sterile gauze, keep moist — dry tissue dies. Emergency surgical intervention required.
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 8: PREVENTION -->
+    <div class="section">
+        <div class="section-header">
+            <h2>Preventing Emergencies</h2>
+            <p>A Holistic Approach to Accident Prevention</p>
+        </div>
+
+        <!-- Prevention Image -->
+        <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&h=400&fit=crop" alt="Happy Healthy Dog" class="real-image">
+        <p class="image-caption">Prevention through training, environmental management, and regular veterinary care</p>
+
+        <div class="content-card">
+            <h3 class="card-title">🏠 Dog-Proofing & Environmental Management</h3>
+            <div class="highlight-box">
+                <strong>The "Crawl Walk":</strong> Get on hands and knees to dog eye-level; remove electrical cords, small objects, secure trash with carabiners.
+            </div>
+            
+            <div class="two-column">
+                <div>
+                    <h4 style="color: var(--primary-blue);">Kitchen Protocol</h4>
+                    <ul class="checklist">
+                        <li>Xylitol scan: Check peanut butter labels</li>
+                        <li>Grapes/raisins: Secure in closed cabinets</li>
+                        <li>Compost: Secure lids (mycotoxins)</li>
+                        <li>Bread dough: Rising dough produces ethanol</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--primary-blue);">Garage/Hazmat</h4>
+                    <ul class="checklist">
+                        <li>Ethylene glycol (antifreeze): Use propylene glycol alternatives</li>
+                        <li>Pest control: Bait stations, not loose pellets</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h3 class="card-title">🚗 Car Safety</h3>
+            <div class="alert alert-info">
+                <strong>The Physics:</strong> At 45 km/hr crash, 28 kg dog becomes ~1225 kg projectile.
+            </div>
+            <ul class="checklist">
+                <li>Airbags kill dogs in front seats (even crated)</li>
+                <li>Truck beds: Eye injuries, ejection, heatstroke</li>
+                <li>Use crash-tested crates (Gunner Kennels, Variocage) or harnesses (Sleepypod Clickit)</li>
+            </ul>
+        </div>
+
+        <div class="content-card">
+            <h3 class="card-title">🎒 The 72-Hour Disaster Kit</h3>
+            <ul class="checklist">
+                <li>3 days of food/water (rotate every 3 months)</li>
+                <li>Medications (30-day supply if possible)</li>
+                <li>Vaccination records (waterproof bag)</li>
+                <li>Recent photo (proof of ownership)</li>
+                <li>Sturdy leashes/harnesses and collapsible crates</li>
+                <li>First aid kit</li>
+                <li>Sanitation supplies</li>
+            </ul>
+        </div>
+
+        <div class="content-card">
+            <h3 class="card-title">📋 Action Items & Wrap Up</h3>
+            <div class="procedure">
+                <div class="procedure-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content"><strong>This Week:</strong> Create the kit; practice restraint; record baseline vitals</div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content"><strong>This Month:</strong> Audit house hazards; ID the ER; take a certification course</div>
+                </div>
+                <div class="procedure-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content"><strong>This Quarter:</strong> Emergency drill; review insurance; update microchip</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="manual-footer">
+        <div class="emergency-card">
+            <h3>🚨 Emergency Numbers</h3>
+            <p style="margin: 0.5rem 0;"><strong>Animal Poison Control:</strong> ___________________</p>
+            <p style="margin: 0.5rem 0;"><strong>Pet Poison Helpline:</strong> ___________________</p>
+            <p style="margin: 0.5rem 0;"><strong>Your Veterinarian:</strong> ___________________</p>
+            <p style="margin: 0.5rem 0;"><strong>24-Hour Emergency Clinic:</strong> ___________________</p>
+            <p style="margin: 0.5rem 0;"><strong>Pet Insurance Policy:</strong> ___________________</p>
+        </div>
+        <p style="margin-top: 2rem; font-style: italic; font-size: 1.1rem;">
+            "Your dog's life may literally depend on what you do in the next 10 minutes. Be ready."
+        </p>
+        <p style="margin-top: 1rem; opacity: 0.8;">
+            © 2024 Canine First Aid Educational Resource. For educational purposes only.
+        </p>
+    </div>
+
+</body>
+</html>
